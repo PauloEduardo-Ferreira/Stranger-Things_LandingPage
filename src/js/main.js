@@ -1,18 +1,23 @@
 function switchTheme() {
-    const music = document.getElementById('music')
-    const source = music.querySelector('source')
+    const music = document.getElementById('music');
+    const source = music.querySelector('source');
 
+    // Troca o src da música
     if (source.src.includes('normal-world.mpeg')) {
-        source.src = 'src/musics/inverted-world.mpeg'
+        source.src = 'src/musics/inverted-world.mpeg';
     } else {
-        source.src = 'src/normal-world.mpeg'
+        source.src = 'src/musics/normal-world.mpeg'; 
     }
 
-    music.load()
-    music.play()
+    music.load(); 
 
-    music.volume = 0.3;
+    // Espera o áudio carregar antes de dar play
+    music.oncanplaythrough = () => {
+        music.play();
+        music.volume = 0.3;
+    };
 
-    document.body.classList.toggle('dark-theme')
-    document.body.classList.toggle('light-theme')
+    // Alterna o tema visual
+    document.body.classList.toggle('dark-theme');
+    document.body.classList.toggle('light-theme');
 }
